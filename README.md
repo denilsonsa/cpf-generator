@@ -15,6 +15,22 @@ That means 1 giga-numbers (1000000000 or 10^9), for a total of 12GB (each number
     $ ./cpf-generator | wc
     1000000000 1000000000 12000000000
 
+The CPF numbers are printed without any special formatting.
+
+    $ ./cpf-generator | head -n 3
+    00000000000
+    00000000191
+    00000000272
+
+Alternatively, you can easily change the code to print formatted numbers.
+
+    $ ./cpf-generator | head -n 3
+    000.000.000-00
+    000.000.001-91
+    000.000.002-72
+
+Sure, I could have added a command-line argument to toggle the behavior… But so far I didn't (for simplicity and for laziness).
+
 ## Requirements
 
 * C compiler. Tested with `gcc`. Should work with any C compiler. If you use another compiler, please tweak the `Makefile`.

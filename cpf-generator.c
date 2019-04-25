@@ -1,12 +1,38 @@
 #include <stdio.h>
 
+// Digits before the verification digits ("DV").
 #define DIGITS 9
+// All digits, including the verification ones.
 #define MAX_DIGITS 11
+// Extra characters for the dots and hyphen, and for newline and NULL.
+#define MAX_STRING (MAX_DIGITS + 2 + 3)
+// Change this between zero or one.
+#define PRINT_FORMATTED 0
 
-signed char digits[MAX_DIGITS];
-char output[MAX_DIGITS + 2];
+// Digits, stored as integers.
+char digits[MAX_DIGITS];
+// Characters, as a NULL-terminated string including a trailing newline.
+char output[MAX_STRING];
 
 void print() {
+#if PRINT_FORMATTED
+	output[ 0] = digits[ 0] + '0';
+	output[ 1] = digits[ 1] + '0';
+	output[ 2] = digits[ 2] + '0';
+	output[ 3] =              '.';
+	output[ 4] = digits[ 3] + '0';
+	output[ 5] = digits[ 4] + '0';
+	output[ 6] = digits[ 5] + '0';
+	output[ 7] =              '.';
+	output[ 8] = digits[ 6] + '0';
+	output[ 9] = digits[ 7] + '0';
+	output[10] = digits[ 8] + '0';
+	output[11] =              '-';
+	output[12] = digits[ 9] + '0';
+	output[13] = digits[10] + '0';
+	output[14] =              '\n';
+	output[15] =              '\0';
+#else
 	int i = MAX_DIGITS + 2;
 	output[--i] = '\0';
 	output[--i] = '\n';
@@ -14,6 +40,7 @@ void print() {
 		--i;
 		output[i] = digits[i] + '0';
 	}
+#endif
 	fputs(output, stdout);
 	// fwrite(output, 1, MAX_DIGITS + 1, stdout);
 }
